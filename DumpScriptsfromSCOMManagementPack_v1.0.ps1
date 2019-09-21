@@ -132,12 +132,12 @@ if($probeactionfiles)
             Write-Host "Script found. Dumping Script....    " $scriptname -ForegroundColor Green
             $probeactionfile.Contents | Out-File $destinationpath\$scriptname
         }
-        if($scriptname -match "cmd")
+        elseif($scriptname -match "cmd")
         {
             Write-Host "Script found. Dumping Script....    " $scriptname -ForegroundColor Green
             $probeactionfile.Contents | Out-File $destinationpath\$scriptname
         }
-        if($scriptname -match "vbs")
+        elseif($scriptname -match "vbs")
         {
             Write-Host "Script found. Dumping Script....    " $scriptname -ForegroundColor Green
             $probeactionfile.Contents | Out-File $destinationpath\$scriptname
@@ -171,6 +171,49 @@ if($probeactionmodules)
     }
 }
 #endregion Dump-PA-ProbeAction
+
+#region Dump-Discovery-DS-Files
+#This will dump only the scripts which are defined inside Discovery Data Source Files
+$discoverydatasourcefiles=$xmlcontent.selectnodes('//ManagementPack/Monitoring/Discoveries/Discovery/DataSource/Files/File')
+if($discoverydatasourcefiles)
+{
+    foreach($discoverydatasourcefile in $discoverydatasourcefiles)
+    {
+        $scriptname=$discoverydatasourcefile.name
+        if($scriptname -match "ps1")
+        {
+            Write-Host "Script found. Dumping Script....    " $scriptname -ForegroundColor Green
+            $discoverydatasourcefile.Contents | Out-File $destinationpath\$scriptname 
+        } 
+        elseif($scriptname -match "cmd")
+        {
+            Write-Host "Script found. Dumping Script....    " $scriptname -ForegroundColor Green
+            $discoverydatasourcefile.Contents | Out-File $destinationpath\$scriptname 
+        } 
+        if($scriptname -match "vbs")
+        {
+            Write-Host "Script found. Dumping Script....    " $scriptname -ForegroundColor Green
+            $discoverydatasourcefile.Contents | Out-File $destinationpath\$scriptname 
+        } 
+    }
+}
+#endregion Dump-Discovery-DS-Files
+
+#region Dump-Monitor-Script
+$unitmonitorconfigurations=$xmlcontent.selectnodes('//ManagementPack/Monitoring/Monitors/UnitMonitor/Configuration')
+if($unitmonitorconfigurations)
+{
+    foreach($unitmonitorconfiguration in $unitmonitorconfigurations)
+    {
+        $scriptname=$unitmonitorconfiguration.scriptname
+        if($scriptname)
+        {
+        Write-Host "Script found. Dumping Script....    " $scriptname -ForegroundColor Green
+        $unitmonitorconfiguration.scriptbody | Out-File $destinationpath\$scriptname 
+        }
+    }
+}
+#endregion Dump-Monitor-Script
 
 #region NoDump
 $content=Get-ChildItem $destinationpath
