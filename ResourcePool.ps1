@@ -21,7 +21,7 @@ Get-SCOMResourcePool –DisplayName “Notifications Resource Pool” | Set-SCOM
 Get-SCOMResourcePool –DisplayName “All Management Servers Resource Pool” | Set-SCOMResourcePool –EnableAutomaticMembership 1
 Get-SCOMResourcePool –DisplayName “AD Assignment Resource Pool” | Set-SCOMResourcePool –EnableAutomaticMembership 1
 
-#To add or remove Management Servers or Gateways from a manual pool
+#To add or remove Management Server or Gateway from a manual pool
 $pool = Get-SCOMResourcePool -DisplayName "Your Pool Name"
 $MS = Get-SCOMManagementServer -Name "YourMSorGW.domain.com"
 $pool | Set-SCOMResourcePool -Member $MS -Action "Add" 
