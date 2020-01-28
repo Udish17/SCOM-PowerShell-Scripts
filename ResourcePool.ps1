@@ -27,7 +27,7 @@ $MS = Get-SCOMManagementServer -Name "YourMSorGW.domain.com"
 $pool | Set-SCOMResourcePool -Member $MS -Action "Add" 
 $pool | Set-SCOMResourcePool -Member $MS -Action "Remove"
 
-#To add or remove Management Servers or Gateways as Observers only to a pool
+#To add or remove Management Server or Gateway as Observers only to a pool
 $pool = Get-SCOMResourcePool -DisplayName "Your Pool Name"
 $Observer = Get-SCOMManagementServer -Name "YourMSorGW.domain.com"
 $pool | Set-SCOMResourcePool -Observer $Observer -Action "Add"
