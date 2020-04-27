@@ -2,6 +2,7 @@
 
 $installdir=(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Microsoft Operations Manager\3.0\Setup').installdirectory
 
+
 Write-Host "Stopping Health Service" -ForegroundColor Cyan
 Stop-Service HealthService
 $cachefolder=$installdir + "Health Service State"
