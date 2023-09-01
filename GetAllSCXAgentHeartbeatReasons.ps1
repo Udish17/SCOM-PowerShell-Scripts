@@ -34,4 +34,4 @@ foreach($OpenHeartbeatAlert in $OpenHeartbeatAlerts)
 
 #$Objects | Out-GridView
 #$Objects | fl * 
-$Objects | Export-Csv -Path $Path\heartbeatdeatils.csv
+$Objects | Export-Csv -Path $Path\heartbeatreasondetails.csv
